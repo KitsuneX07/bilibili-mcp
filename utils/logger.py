@@ -5,7 +5,7 @@ import os
 console_format = "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>[{process.name}:{process.id}]</cyan> | <level>{message}</level>"
 
 
-def setup_logger(log_dir:str = "logs", console_log_level: str = "INFO", file_log_level: str  = "DEBUG"):
+def setup_logger(log_dir: str = "logs", console_log_level: str = "INFO", file_log_level: str = "DEBUG"):
 	logger.remove()  # Remove the default logger
 
 	logger.add(
