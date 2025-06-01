@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 os.chdir(os.path.abspath(os.path.dirname(__file__)))
 
 from mcp.server.fastmcp import FastMCP
-from utils import setup_logger
+from utils import setup_logger, CredentialManager
 
 mcp = FastMCP("bilibili-mcp")
 
@@ -22,9 +22,9 @@ from bilibili_api import Credential, video
 
 async def test() -> None:
 	# 实例化 Credential 类
-	credential = Credential(sessdata=os.getenv("SESSDATA"), bili_jct=os.getenv("BILI_JCT"), buvid3=os.getenv("BUVID3"))
+	credential = CredentialManager.get_instance()
 	# 实例化 Video 类
-	v = video.Video(bvid="BV17V7pz9Eoe", credential=credential)
+	v = video.Video(bvid="BV14y7sz3E4x", credential=credential)
 	info = await v.get_info()
 	logger.info(f"{info}")
 	# 给视频点赞
