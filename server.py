@@ -17,7 +17,7 @@ from utils import setup_logger, CredentialManager
 
 mcp = FastMCP("bilibili-mcp")
 
-from bilibili_api import Credential, video
+from bilibili_api import video
 
 
 async def test() -> None:
