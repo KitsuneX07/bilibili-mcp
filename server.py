@@ -8,14 +8,12 @@ load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 from loguru import logger
 
-
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 os.chdir(os.path.abspath(os.path.dirname(__file__)))
+from app import mcp
 
-from mcp.server.fastmcp import FastMCP
 from utils import setup_logger, CredentialManager
 
-mcp = FastMCP("bilibili-mcp")
 
 from bilibili_api import video
 
