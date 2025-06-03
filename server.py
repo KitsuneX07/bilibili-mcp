@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 os.chdir(os.path.abspath(os.path.dirname(__file__)))
 from app import mcp
 
-from utils import setup_logger, CredentialManager
+from app.utils import setup_logger, CredentialManager
 
 
 from bilibili_api import video
