@@ -1,3 +1,3 @@
-from mcp.server import FastMCP
+from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("bilibili-mcp")
