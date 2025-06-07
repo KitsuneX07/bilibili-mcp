@@ -35,6 +35,21 @@ To run the mcp:
 uv run --directory /path/to/your/bilibili-mcp /path/to/your/bilibili-mcp/server.py
 ```
 
+Use in json format:
+```json
+"mcpServers": {
+  "bilibili-mcp": {
+    "command": "uv",
+    "args": [
+        "run",
+        "--directory",
+        "/path/to/your/bilibili-mcp",
+        "/path/to/your/bilibili-mcp/server.py"
+      ]
+  }
+}
+```
+
 ## Technologies Used
 ## MCP Tools
 
