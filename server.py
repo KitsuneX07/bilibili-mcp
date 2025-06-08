@@ -13,6 +13,8 @@ from app import mcp
 
 from app.utils import setup_logger
 from app.video import *
+from app.favorite_list import *
+
 
 @logger.catch()
 def main():
