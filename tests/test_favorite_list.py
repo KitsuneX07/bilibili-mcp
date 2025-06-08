@@ -1,18 +1,16 @@
-import sys
 import os
+import sys
 
+from bilibili_api import favorite_list
 from dotenv import load_dotenv
+from loguru import logger
+
+from app.utils import CredentialManager
 
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
-from loguru import logger
-
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 os.chdir(os.path.join(os.path.dirname(__file__), ".."))
-
-
-from bilibili_api import favorite_list
-from app.utils import CredentialManager
 
 
 cre = CredentialManager.get_instance()

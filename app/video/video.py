@@ -1,8 +1,10 @@
-from bilibili_api import video
-from app.utils import CredentialManager
-from app import mcp
 from typing import Optional
+
+from bilibili_api import video
 from loguru import logger
+
+from app import mcp
+from app.utils import CredentialManager
 
 
 @mcp.tool()
@@ -14,9 +16,9 @@ async def like_video(bvid: Optional[str] = None, aid: Optional[int] = None, like
 	Either bvid or aid must be provided.
 
 	Args:
-	    bvid (Optional[str]): The BV ID of the video to like or unlike.
-	    aid (Optional[int]): The AV ID of the video to like or unlike.
-	    like (bool): Set to True to like the video, False to unlike it. Defaults to True.
+		bvid (Optional[str]): The BV ID of the video to like or unlike.
+		aid (Optional[int]): The AV ID of the video to like or unlike.
+		like (bool): Set to True to like the video, False to unlike it. Defaults to True.
 	"""
 	if bvid is None and aid is None:
 		logger.error("Error: Either bvid or aid must be provided.")
@@ -50,13 +52,13 @@ async def get_video_info(bvid: Optional[str] = None, aid: Optional[int] = None) 
 	Either bvid or aid must be provided.
 
 	Args:
-	    bvid (Optional[str]): The BV ID of the video.
-	    aid (Optional[int]): The AV ID of the video.
+		bvid (Optional[str]): The BV ID of the video.
+		aid (Optional[int]): The AV ID of the video.
 
 	Returns:
-	    dict: A dictionary containing two keys:
-	          'info' for basic video information (e.g., title, author),
-	          and 'detail' for more comprehensive video details.
+		dict: A dictionary containing two keys:
+		'info' for basic video information (e.g., title, author),
+		and 'detail' for more comprehensive video details.
 	"""
 	if bvid is None and aid is None:
 		logger.error("Error: Either bvid or aid must be provided.")
@@ -84,8 +86,8 @@ async def add_to_toview(bvid: Optional[str] = None, aid: Optional[int] = None) -
 	Either bvid or aid must be provided.
 
 	Args:
-	    bvid (Optional[str]): The BV ID of the video to add to the "Watch Later" list.
-	    aid (Optional[int]): The AV ID of the video to add to the "Watch Later" list.
+		bvid (Optional[str]): The BV ID of the video to add to the "Watch Later" list.
+		aid (Optional[int]): The AV ID of the video to add to the "Watch Later" list.
 	"""
 	if bvid is None and aid is None:
 		logger.error("Error: Either bvid or aid must be provided.")
@@ -116,8 +118,8 @@ async def delete_from_toview(bvid: Optional[str] = None, aid: Optional[int] = No
 	Either bvid or aid must be provided.
 
 	Args:
-	    bvid (Optional[str]): The BV ID of the video to remove from the "Watch Later" list.
-	    aid (Optional[int]): The AV ID of the video to remove from the "Watch Later" list.
+		bvid (Optional[str]): The BV ID of the video to remove from the "Watch Later" list.
+		aid (Optional[int]): The AV ID of the video to remove from the "Watch Later" list.
 	"""
 	if bvid is None and aid is None:
 		logger.success("Error: Either bvid or aid must be provided.")
@@ -147,14 +149,14 @@ async def get_video_download_url(bvid: Optional[str] = None, aid: Optional[int] 
 	Either bvid or aid must be provided.
 
 	Args:
-	    bvid (Optional[str]): The BV ID of the video.
-	    aid (Optional[int]): The AV ID of the video.
-	    cid (Optional[int]): The CID (part ID) of the video. Required for specific parts of multi-part videos if 'page_index' is not used.
-	    page_index (Optional[int]): The 1-based page index of the video part. Required for specific parts of multi-part videos if 'cid' is not used.
+		bvid (Optional[str]): The BV ID of the video.
+		aid (Optional[int]): The AV ID of the video.
+		cid (Optional[int]): The CID (part ID) of the video. Required for specific parts of multi-part videos if 'page_index' is not used.
+		page_index (Optional[int]): The 1-based page index of the video part. Required for specific parts of multi-part videos if 'cid' is not used.
 
 	Returns:
-	    Optional[dict]: A dictionary containing download link information, or None if the operation fails.
-	                    The dictionary typically includes URLs for different qualities.
+		Optional[dict]: A dictionary containing download link information, or None if the operation fails.
+						The dictionary typically includes URLs for different qualities.
 	"""
 	if bvid is None and aid is None:
 		logger.error("Error: Either bvid or aid must be provided.")

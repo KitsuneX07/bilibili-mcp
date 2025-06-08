@@ -1,6 +1,7 @@
-from loguru import logger
-from sys import stderr
 import os
+from sys import stderr
+
+from loguru import logger
 
 console_format = "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>[{process.name}:{process.id}]</cyan> | <level>{message}</level>"
 

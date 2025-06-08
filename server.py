@@ -1,19 +1,17 @@
-import sys
 import os
+import sys
 
 from dotenv import load_dotenv
-
-load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
-
 from loguru import logger
 
+from app import mcp
+from app.favorite_list import *  # noqa: F403
+from app.utils import setup_logger
+from app.video import *  # noqa: F403
+
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 os.chdir(os.path.abspath(os.path.dirname(__file__)))
-from app import mcp
-
-from app.utils import setup_logger
-from app.video import *
-from app.favorite_list import *
 
 
 @logger.catch()

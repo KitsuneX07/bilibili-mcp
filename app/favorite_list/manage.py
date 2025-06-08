@@ -1,9 +1,10 @@
-from app.utils import CredentialManager
-from app import mcp
-from typing import Optional
-from loguru import logger
-from bilibili_api import favorite_list
 import os
+
+from bilibili_api import favorite_list
+from loguru import logger
+
+from app import mcp
+from app.utils import CredentialManager
 
 
 @mcp.tool()
