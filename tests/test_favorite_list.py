@@ -26,7 +26,7 @@ async def test_create_favorite_list():
 async def test_get_favorite_list():
 	resp = await favorite_list.get_video_favorite_list(uid=uid, credential=cre)
 	logger.info(f"Retrieved favorite list: {resp}")
-	with open("favorite_list.json", "w", encoding="utf-8") as f:
+	with open(".cache/favorite_list.json", "w", encoding="utf-8") as f:
 		import json
 
 		json.dump(resp, f, ensure_ascii=False, indent=4)

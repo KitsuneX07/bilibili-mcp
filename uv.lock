@@ -1,4 +1,5 @@
 version = 1
+revision = 2
 requires-python = ">=3.12"
 
 [[package]]
@@ -81,6 +82,7 @@ dependencies = [
     { name = "curl-cffi" },
     { name = "loguru" },
     { name = "mcp", extra = ["cli"] },
+    { name = "pydantic" },
 ]
 
 [package.metadata]
@@ -89,6 +91,7 @@ requires-dist = [
     { name = "curl-cffi", specifier = ">=0.11.1" },
     { name = "loguru", specifier = ">=0.7.3" },
     { name = "mcp", extras = ["cli"], specifier = ">=1.9.0" },
+    { name = "pydantic", specifier = ">=2.11.4" },
 ]
 
 [[package]]
@@ -176,7 +179,7 @@ name = "click"
 version = "8.1.8"
 source = { registry = "https://mirrors.nju.edu.cn/pypi/web/simple" }
 dependencies = [
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://mirrors.nju.edu.cn/pypi/web/packages/b9/2e/0090cbf739cee7d23781ad4b89a9894a41538e4fcf4c31dcdd705b78eb8b/click-8.1.8.tar.gz", hash = "sha256:ed53c9d8990d83c2a27deae68e4ee337473f6330c040a31d4225c9574d16096a" }
 wheels = [
@@ -550,8 +553,6 @@ wheels = [
     { url = "https://mirrors.nju.edu.cn/pypi/web/packages/61/74/49f5d20c514ccc631b940cc9dfec45dcce418dc84a98463a2e2ebec33904/pycryptodomex-3.21.0-cp36-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:52e23a0a6e61691134aa8c8beba89de420602541afaae70f66e16060fdcd677e" },
     { url = "https://mirrors.nju.edu.cn/pypi/web/packages/92/4b/d33ef74e2cc0025a259936661bb53432c5bbbadc561c5f2e023bcd73ce4c/pycryptodomex-3.21.0-cp36-abi3-win32.whl", hash = "sha256:a3d77919e6ff56d89aada1bd009b727b874d464cb0e2e3f00a49f7d2e709d76e" },
     { url = "https://mirrors.nju.edu.cn/pypi/web/packages/5b/be/7c991840af1184009fc86267160948350d1bf875f153c97bb471ad944e40/pycryptodomex-3.21.0-cp36-abi3-win_amd64.whl", hash = "sha256:b0e9765f93fe4890f39875e6c90c96cb341767833cfa767f41b490b506fa9ec0" },
-    { url = "https://mirrors.nju.edu.cn/pypi/web/packages/af/ac/24125ad36778914a36f08d61ba5338cb9159382c638d9761ee19c8de822c/pycryptodomex-3.21.0-pp27-pypy_73-manylinux2010_x86_64.whl", hash = "sha256:feaecdce4e5c0045e7a287de0c4351284391fe170729aa9182f6bd967631b3a8" },
-    { url = "https://mirrors.nju.edu.cn/pypi/web/packages/93/73/be7a54a5903508070e5508925ba94493a1f326cfeecfff750e3eb250ea28/pycryptodomex-3.21.0-pp27-pypy_73-win32.whl", hash = "sha256:365aa5a66d52fd1f9e0530ea97f392c48c409c2f01ff8b9a39c73ed6f527d36c" },
 ]
 
 [[package]]
@@ -824,7 +825,7 @@ name = "tzlocal"
 version = "5.3.1"
 source = { registry = "https://mirrors.nju.edu.cn/pypi/web/simple" }
 dependencies = [
-    { name = "tzdata", marker = "platform_system == 'Windows'" },
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://mirrors.nju.edu.cn/pypi/web/packages/8b/2e/c14812d3d4d9cd1773c6be938f89e5735a1f11a9f184ac3639b93cef35d5/tzlocal-5.3.1.tar.gz", hash = "sha256:cceffc7edecefea1f595541dbd6e990cb1ea3d19bf01b2809f362a03dd7921fd" }
 wheels = [
