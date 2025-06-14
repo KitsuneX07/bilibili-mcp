@@ -19,9 +19,10 @@ default = true
 [tool.ruff]
 target-version = "py312"
 line-length = 200
+indent-width = 4
 
 [tool.ruff.format]
-indent-style = "tab"
+indent-style = "space"
 line-ending = "auto"
 quote-style = "double"
 skip-magic-trailing-comma = true
