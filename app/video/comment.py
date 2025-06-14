@@ -38,8 +38,27 @@ async def get_video_comments(bvid: str, page_index: int = 1, time_order: bool = 
     return result
 
 
-async def send_comment():
-    raise NotImplementedError
+@mcp.tool()
+async def send_comment(bvid: str, message: str):
+    """Sends a comment to a specified Bilibili video.
+
+    This function allows users to post comments on a Bilibili video identified by its BVID.
+    It internally converts the BVID to an AID before sending the comment via the Bilibili API.
+
+    Args:
+        bvid (str): The BVID (Bilibili Video ID) of the video to comment on.
+        message (str): The content of the comment to be sent.
+
+    Returns:
+        dict: A dictionary containing the API response from sending the comment,
+                typically indicating success or failure.
+
+    Side Effects:
+        Makes an API call to Bilibili to post a comment.
+    """
+    aid = await get_aid_by_bvid(bvid)
+    resp = await comment.send_comment(text=message, oid=aid, type_=comment.CommentResourceType.VIDEO, credential=cre)
+    return resp
 
 
 async def reply_comment():
