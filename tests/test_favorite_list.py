@@ -5,7 +5,7 @@ from bilibili_api import favorite_list
 from dotenv import load_dotenv
 from loguru import logger
 
-from app.utils import CredentialManager
+from app.utils.credential import CredentialManager
 
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 

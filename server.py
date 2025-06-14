@@ -6,7 +6,7 @@ from loguru import logger
 
 from app import mcp
 from app.favorite_list import *  # noqa: F403
-from app.utils import setup_logger
+from app.utils.logger import setup_logger
 from app.video import *  # noqa: F403
 
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))

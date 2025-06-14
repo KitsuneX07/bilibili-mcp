@@ -1,7 +1,7 @@
 from bilibili_api import video
 from typing import List
 from app import mcp
-from app.utils import CredentialManager
+from app.utils.credential import CredentialManager
 from app.models.video import VideoInfo
 from bilibili_api import video
 

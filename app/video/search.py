@@ -1,5 +1,4 @@
 from bilibili_api import search
-from typing import List
 from loguru import logger
 from app import mcp
 from app.models.video import SearchVideoResponse
