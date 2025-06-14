@@ -34,7 +34,6 @@ async def search_video(keyword: str, num_results: int = 10, descending: bool = T
 	        SearchVideoInfo objects.
 	"""
 	resp = await search.search_by_type(keyword=keyword, search_type=search.SearchObjectType.VIDEO, page=1, page_size=num_results, order_type=order_type, order_sort=0 if descending else 1)
-	resp = SearchVideoResponse.model_validate(resp)
-	result = resp.model_dump()
+	result = SearchVideoResponse.model_validate(resp).model_dump()
 	logger.info(f"Search results for '{keyword}': {result}")
 	return result

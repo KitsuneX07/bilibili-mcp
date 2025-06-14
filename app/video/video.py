@@ -10,17 +10,17 @@ cre = CredentialManager.get_instance()
 
 async def get_aid_by_bvid(bvid: str) -> int:
 	v = video.Video(bvid=bvid, credential=cre)
-	return await v.get_aid()
+	return v.get_aid()
 
 
 async def get_bvid_by_aid(aid: int) -> str:
 	v = video.Video(aid=aid, credential=cre)
-	return await v.get_bvid()
+	return v.get_bvid()
 
 
 async def get_cid(bvid: str, page_index: int = 0) -> int:
 	v = video.Video(bvid=bvid, credential=cre)
-	return await v.get_cid(page_index=page_index)
+	return v.get_cid(page_index=page_index)
 
 
 async def set_video_favorite(bvid: str, add_media_ids: List[int] = [], del_media_ids: List[int] = []) -> dict:
