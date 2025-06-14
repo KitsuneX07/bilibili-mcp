@@ -1,28 +1,9 @@
 from bilibili_api import search
-from pydantic import BaseModel, ConfigDict
 from typing import List
 from loguru import logger
 from app import mcp
-
-
-class SearchVideoInfo(BaseModel):
-	author: str
-	mid: int
-	arcurl: str
-	aid: int
-	bvid: str
-	title: str
-	description: str
-	tag: str
-	duration: str
-
-	model_config = ConfigDict(extra="ignore")
-
-
-class SearchVideoResponse(BaseModel):
-	result: List[SearchVideoInfo]
-
-	model_config = ConfigDict(extra="ignore")
+from app.models.video import SearchVideoResponse
+from bilibili_api import search
 
 
 @mcp.tool()

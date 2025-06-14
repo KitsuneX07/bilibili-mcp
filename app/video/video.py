@@ -1,38 +1,11 @@
 from bilibili_api import video
 from typing import List
-from pydantic import BaseModel, ConfigDict
 from app import mcp
 from app.utils import CredentialManager
+from app.models.video import VideoInfo
+from bilibili_api import video
 
 cre = CredentialManager.get_instance()
-
-
-class VideoOwnerInfo(BaseModel):
-	mid: int
-	name: str
-
-	model_config = ConfigDict(extra="ignore")
-
-
-class VideoPageInfo(BaseModel):
-	cid: int
-	part: str
-
-	model_config = ConfigDict(extra="ignore")
-
-
-class VideoInfo(BaseModel):
-	bvid: str
-	aid: str
-	videos: int
-	tname: str
-	tname_v2: str
-	title: str
-	desc: str
-	owner: VideoOwnerInfo
-	pages: List[VideoPageInfo]
-
-	model_config = ConfigDict(extra="ignore")
 
 
 async def get_aid_by_bvid(bvid: str) -> int:
