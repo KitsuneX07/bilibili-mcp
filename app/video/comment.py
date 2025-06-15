@@ -55,6 +55,7 @@ async def send_comment(bvid: str, message: str):
     """
     aid = await get_aid_by_bvid(bvid)
     resp = await comment.send_comment(text=message, oid=aid, type_=comment.CommentResourceType.VIDEO, credential=cre)
+    logger.info(f"Sent comment to video {bvid} (aid: {aid}): {message}")
     return resp
 
 

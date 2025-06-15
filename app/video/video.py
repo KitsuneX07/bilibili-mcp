@@ -1,6 +1,7 @@
 from bilibili_api import video
 from typing import List
 import difflib
+from loguru import logger
 from app import mcp
 from app.utils.credential import CredentialManager
 from app.models.video import VideoInfo
@@ -58,7 +59,9 @@ async def get_video_info(bvid: str) -> dict:
     """
     v = video.Video(bvid=bvid, credential=cre)
     resp = await v.get_info()
-    return VideoInfo.model_validate(resp).model_dump()
+    result = VideoInfo.model_validate(resp).model_dump()
+    logger.info(f"Retrieved video info for {bvid}")
+    return result
 
 
 @mcp.tool()
@@ -74,7 +77,9 @@ async def pay_video_coin(bvid: str, num: int = 1, like: bool = False) -> dict:
             dict: A dictionary containing the result of the coin payment operation.
     """
     v = video.Video(bvid=bvid, credential=cre)
-    return await v.pay_coin(num=num, like=like)
+    result = await v.pay_coin(num=num, like=like)
+    logger.info(f"Paid {num} coin(s) to video {bvid}, like: {like}")
+    return result
 
 
 @mcp.tool()
@@ -88,7 +93,9 @@ async def triple_video(bvid: str) -> dict:
             dict: A dictionary containing the result of the triple operation.
     """
     v = video.Video(bvid=bvid, credential=cre)
-    return await v.triple()
+    result = await v.triple()
+    logger.info(f"Performed triple action on video {bvid}")
+    return result
 
 
 @mcp.tool()
@@ -102,7 +109,9 @@ async def add_video_to_toview(bvid: str) -> dict:
             dict: A dictionary containing the result of the add to "Watch Later" operation.
     """
     v = video.Video(bvid=bvid, credential=cre)
-    await v.add_to_toview()
+    reuslt = v.add_to_toview()
+    logger.info(f"Added video {bvid} to 'Watch Later' list")
+    return reuslt
 
 
 @mcp.tool()
@@ -116,7 +125,9 @@ async def delete_video_from_toview(bvid: str) -> dict:
             dict: A dictionary containing the result of the delete from "Watch Later" operation.
     """
     v = video.Video(bvid=bvid, credential=cre)
-    await v.delete_from_toview()
+    result = v.delete_from_toview()
+    logger.info(f"Deleted video {bvid} from 'Watch Later' list")
+    return result
 
 
 @mcp.tool()
@@ -131,4 +142,6 @@ async def like_video(bvid: str, like: bool = True) -> dict:
             dict: A dictionary containing the result of the like/unlike operation.
     """
     v = video.Video(bvid=bvid, credential=cre)
-    return await v.like(like=like)
+    result = await v.like(like=like)
+    logger.info(f"{'Liked' if like else 'Unliked'} video {bvid}")
+    return result
