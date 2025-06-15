@@ -38,7 +38,7 @@ class VideoPageInfo(BaseModel):
 
 class VideoInfo(BaseModel):
     bvid: str
-    aid: str
+    aid: int
     videos: int
     tname: str
     tname_v2: str

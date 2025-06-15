@@ -52,9 +52,6 @@ async def send_comment(bvid: str, message: str):
     Returns:
         dict: A dictionary containing the API response from sending the comment,
                 typically indicating success or failure.
-
-    Side Effects:
-        Makes an API call to Bilibili to post a comment.
     """
     aid = await get_aid_by_bvid(bvid)
     resp = await comment.send_comment(text=message, oid=aid, type_=comment.CommentResourceType.VIDEO, credential=cre)
