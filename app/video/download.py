@@ -54,7 +54,7 @@ async def _download_chunked(url: str, out_path: Path, intro: str):
         raise
 
 @mcp.tool()
-async def download_video_best_quality(bvid: str, part_name: str = None, out_dir: str = os.getenv("DOWNLOAD_DIR")):
+async def download_video_best_quality(bvid: str, part_name: str = None, out_dir: str = os.getenv("DOWNLOAD_DIR", "downloads")):
     """Downloads a Bilibili video in the best available quality.
 
     This function downloads a Bilibili video, or a specific part of a multi-part video,
@@ -96,10 +96,12 @@ async def download_video_best_quality(bvid: str, part_name: str = None, out_dir:
 
         download_url_data = await v.get_download_url(0) if not part_name else await v.get_download_url(cid=target_cid)
         detecter = video.VideoDownloadURLDataDetecter(data=download_url_data)
+        
         streams = detecter.detect_best_streams()
         if not streams:
             logger.error(f"No available streams detected for BVID: {bvid}, Part: {part_name}.")
             return None
+        logger.info(f"Detected streams for BVID: {bvid}, Part: {part_name}: {streams}")
 
         final_filename_base = f"{bvid}_{part_name}" if part_name else bvid
         final_output_path = output_directory / f"{final_filename_base}.mp4"
