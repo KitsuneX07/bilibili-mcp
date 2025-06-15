@@ -57,11 +57,17 @@ This project exposes several functionalities as MCP tools, allowing external sys
 
 ### Video Management
 
-*   **`like_video(bvid: Optional[str] = None, aid: Optional[int] = None, like: bool = True)`**: Manages liking or unliking a Bilibili video.
-*   **`get_video_info(bvid: Optional[str] = None, aid: Optional[int] = None)`**: Retrieves detailed and basic information for a specified Bilibili video.
-*   **`add_to_toview(bvid: Optional[str] = None, aid: Optional[int] = None)`**: Adds a Bilibili video to the user's "Watch Later" list.
-*   **`delete_from_toview(bvid: Optional[str] = None, aid: Optional[int] = None)`**: Removes a Bilibili video from the user's "Watch Later" list.
-*   **`get_video_download_url(bvid: Optional[str] = None, aid: Optional[int] = None, cid: Optional[int] = None, page_index: Optional[int] = None)`**: Retrieves the download URL for a Bilibili video.
+*   **`get_video_comments(bvid: str, page_index: int = 1, time_order: bool = False)`**: Retrieves comments for a given Bilibili video.
+*   **`send_comment(bvid: str, message: str)`**: Sends a comment to a specified Bilibili video.
+*   **`download_video_best_quality(bvid: str, part_name: Optional[str] = None, out_dir: str = os.getenv("DOWNLOAD_DIR", "downloads"))`**: Downloads a Bilibili video in the best available quality.
+*   **`get_hot_videos(num_videos: int = 10)`**: Retrieves a list of hot videos from Bilibili.
+*   **`search_video(keyword: str, num_results: int = 10, descending: bool = True, order_type: search.OrderVideo = search.OrderVideo.TOTALRANK)`**: Searches for videos on Bilibili based on a keyword.
+*   **`get_video_info(bvid: str)`**: Retrieves detailed information about a Bilibili video.
+*   **`pay_video_coin(bvid: str, num: int = 1, like: bool = False)`**: Pays coins to a Bilibili video.
+*   **`triple_video(bvid: str)`**: Performs a "triple" action (like, coin, favorite) on a Bilibili video.
+*   **`add_video_to_toview(bvid: str)`**: Adds a Bilibili video to the "Watch Later" list.
+*   **`delete_video_from_toview(bvid: str)`**: Deletes a Bilibili video from the "Watch Later" list.
+*   **`like_video(bvid: str, like: bool = True)`**: Likes or unlikes a Bilibili video.
 
 
 ## Contribution Guidelines
