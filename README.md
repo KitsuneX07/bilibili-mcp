@@ -72,7 +72,7 @@ This project exposes several functionalities as MCP tools, allowing external sys
 
 ## Contribution Guidelines
 
-Guidelines for how others can contribute to your project.
+Guidelines for how others can contribute to this project.
 
 1.  Fork the repository.
 2.  Create a new branch (`git checkout -b feature/YourFeature`).
