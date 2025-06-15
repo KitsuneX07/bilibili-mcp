@@ -16,5 +16,5 @@ __all__ = [
     "triple_video",
     "add_video_to_toview",
     "delete_video_from_toview",
-    "like_video"
+    "like_video",
 ]

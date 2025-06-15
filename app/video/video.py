@@ -23,6 +23,7 @@ async def get_cid_by_page_index(bvid: str, page_index: int = 0) -> int:
     v = video.Video(bvid=bvid, credential=cre)
     return v.get_cid(page_index=page_index)
 
+
 async def get_cid_by_part_name(bvid: str, part_name: str) -> int:
     v = video.Video(bvid=bvid, credential=cre)
     resp = await v.get_info()
@@ -30,17 +31,12 @@ async def get_cid_by_part_name(bvid: str, part_name: str) -> int:
     part_cid_map = {page.part: page.cid for page in video_info.pages}
     if not part_cid_map:
         return None
-    
-    matches = difflib.get_close_matches(
-        part_name,
-        part_cid_map.keys(),
-        n=1,
-        cutoff=0.6
-    )
+
+    matches = difflib.get_close_matches(part_name, part_cid_map.keys(), n=1, cutoff=0.6)
 
     if not matches:
         return None
-    
+
     closest_match_str = matches[0]
     return part_cid_map[closest_match_str]
 
@@ -63,22 +59,6 @@ async def get_video_info(bvid: str) -> dict:
     v = video.Video(bvid=bvid, credential=cre)
     resp = await v.get_info()
     return VideoInfo.model_validate(resp).model_dump()
-
-
-@mcp.tool()
-async def get_video_download_url(bvid: str, page_index: int = 0) -> dict:
-    """Retrieves the download URL for a specific Bilibili video.
-
-    Args:
-            bvid (str): The Bilibili video ID (BV ID).
-            page_index (int, optional): The index of the video page (for multi-part videos). Defaults to 0.
-
-    Returns:
-            dict: A dictionary containing the detected download URLs and related information.
-    """
-    v = video.Video(bvid=bvid, credential=cre)
-    dl = video.VideoDownloadURLDataDetecter(await v.get_download_url(page_index=page_index))
-    return dl.detect_all()
 
 
 @mcp.tool()
@@ -146,7 +126,7 @@ async def like_video(bvid: str, like: bool = True) -> dict:
     Args:
             bvid (str): The Bilibili video ID (BV ID).
             like (bool, optional): True to like the video, False to unlike. Defaults to True.
-            
+
     Returns:
             dict: A dictionary containing the result of the like/unlike operation.
     """

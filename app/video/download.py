@@ -15,7 +15,6 @@ FFMPEG_PATH = os.getenv("FFMPEG_PATH", "ffmpeg")
 
 
 async def _run_command(command: list[str], description: str):
-
     logger.info(f"Executing: {description} - {' '.join(command)}")
     process = await asyncio.create_subprocess_exec(*command, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
     stdout, stderr = await process.communicate()
@@ -31,7 +30,6 @@ async def _run_command(command: list[str], description: str):
 
 
 async def _download_chunked(url: str, out_path: Path, intro: str):
-
     logger.info(f"Starting download: {intro} to {out_path}")
     try:
         dwn_id = await get_client().download_create(url, HEADERS)
@@ -48,10 +46,11 @@ async def _download_chunked(url: str, out_path: Path, intro: str):
                     await file.write(chunk)
                     downloaded_bytes += len(chunk)
                     pbar.update(len(chunk))
-        logger.info(f"Download finished: {intro} to {out_path}") 
+        logger.info(f"Download finished: {intro} to {out_path}")
     except Exception as e:
         logger.error(f"Download failed for {intro}: {e}")
         raise
+
 
 @mcp.tool()
 async def download_video_best_quality(bvid: str, part_name: str = None, out_dir: str = os.getenv("DOWNLOAD_DIR", "downloads")):
@@ -80,7 +79,7 @@ async def download_video_best_quality(bvid: str, part_name: str = None, out_dir:
             specified FFMPEG_PATH.
         Exception: For any other unexpected errors that occur during the download process.
     """
-    
+
     output_directory = Path(out_dir)
     output_directory.mkdir(parents=True, exist_ok=True)
 
@@ -96,7 +95,7 @@ async def download_video_best_quality(bvid: str, part_name: str = None, out_dir:
 
         download_url_data = await v.get_download_url(0) if not part_name else await v.get_download_url(cid=target_cid)
         detecter = video.VideoDownloadURLDataDetecter(data=download_url_data)
-        
+
         streams = detecter.detect_best_streams()
         if not streams:
             logger.error(f"No available streams detected for BVID: {bvid}, Part: {part_name}.")
@@ -110,41 +109,25 @@ async def download_video_best_quality(bvid: str, part_name: str = None, out_dir:
             temp_dir = Path(temp_dir_str)
             logger.info(f"Temporary files will be stored in: {temp_dir}")
             if detecter.check_flv_mp4_stream():
-
                 logger.info("Detected FLV stream.")
                 flv_temp_file = temp_dir / f"{final_filename_base}_temp.flv"
                 await _download_chunked(streams[0].url, flv_temp_file, "Downloading FLV Stream")
 
-                ffmpeg_command = [
-                    FFMPEG_PATH,
-                    "-i", str(flv_temp_file),
-                    "-c", "copy",
-                    "-loglevel", "error",
-                    str(final_output_path)
-                ]
+                ffmpeg_command = [FFMPEG_PATH, "-i", str(flv_temp_file), "-c", "copy", "-loglevel", "error", str(final_output_path)]
                 await _run_command(ffmpeg_command, "Converting FLV to MP4")
             else:
                 if len(streams) < 2:
                     logger.error(f"Detected MP4 stream but not enough video/audio streams found for BVID: {bvid}, Part: {part_name}.")
                     return None
-                
+
                 logger.info("Detected MP4 (Dash) stream.")
                 video_temp_file = temp_dir / f"{final_filename_base}_video.m4s"
                 audio_temp_file = temp_dir / f"{final_filename_base}_audio.m4s"
 
                 await _download_chunked(streams[0].url, video_temp_file, "Downloading Video Stream")
                 await _download_chunked(streams[1].url, audio_temp_file, "Downloading Audio Stream")
-                
 
-                ffmpeg_command = [
-                    FFMPEG_PATH,
-                    "-i", str(video_temp_file),
-                    "-i", str(audio_temp_file),
-                    "-c:v", "copy",
-                    "-c:a", "copy",
-                    "-loglevel", "error",
-                    str(final_output_path)
-                ]
+                ffmpeg_command = [FFMPEG_PATH, "-i", str(video_temp_file), "-i", str(audio_temp_file), "-c:v", "copy", "-c:a", "copy", "-loglevel", "error", str(final_output_path)]
                 await _run_command(ffmpeg_command, "Merging Video and Audio Streams")
             logger.success(f"Video '{final_output_path.name}' downloaded successfully to '{final_output_path.parent}'.")
             return final_output_path
@@ -158,4 +141,3 @@ async def download_video_best_quality(bvid: str, part_name: str = None, out_dir:
         logger.error(f"An unexpected error occurred during download for {bvid}: {e}", exc_info=True)
 
     return None
-

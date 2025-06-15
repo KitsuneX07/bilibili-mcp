@@ -33,11 +33,12 @@ async def test3():
     cid = await get_cid_by_part_name("BV1WWMuzTE37", "赛后采")
     print(cid)
 
+
 async def test4():
     from app.video.download import download_video_best_quality
-    return await download_video_best_quality(
-        bvid="BV1j1421Q7Wj",
-    )
+
+    return await download_video_best_quality(bvid="BV1j1421Q7Wj")
+
 
 if __name__ == "__main__":
     import asyncio
