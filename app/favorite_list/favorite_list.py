@@ -1,5 +1,6 @@
 import os
 import difflib
+from loguru import logger
 from bilibili_api import favorite_list
 from app.utils.credential import CredentialManager
 from app.models.favorite_list import FavoriteListResponse
@@ -17,7 +18,7 @@ async def get_favorite_list_info() -> dict:
 async def get_favorite_list_id_by_title(title: str) -> int:
     result = await get_favorite_list_info()
     title_to_id = {item["title"]: item["id"] for item in result["list"]}
-
+    logger.debug(f"Title to ID mapping: {title_to_id}")
     if not title_to_id:
         return None
 
@@ -27,4 +28,4 @@ async def get_favorite_list_id_by_title(title: str) -> int:
         return None
 
     closest_match_str = matches[0]
-    return title_to_id[closest_match_str]
+    return str(title_to_id[closest_match_str])

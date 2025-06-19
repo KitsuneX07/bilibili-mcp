@@ -12,6 +12,7 @@ from app import mcp
 from app.favorite_list import *  # noqa: F403
 from app.utils.logger import setup_logger
 from app.video import *  # noqa: F403
+from app.favorite_list import *  # noqa: F403
 
 
 @logger.catch()
