@@ -69,6 +69,13 @@ This project exposes several functionalities as MCP tools, allowing external sys
 *   **`delete_video_from_toview(bvid: str)`**: Deletes a Bilibili video from the "Watch Later" list.
 *   **`like_video(bvid: str, like: bool = True)`**: Likes or unlikes a Bilibili video.
 
+### Favorite List Management
+
+*   **`create_video_favorite_list(title: str, introduction: str = "", private: bool = True)`**: Creates a new video favorite list.
+*   **`delete_video_favorite_list(favorite_list_name: str)`**: Deletes a video favorite list by its name.
+*   **`set_video_favorite(bvid: str, favorite_list_name: str)`**: Adds a video to a specified favorite list.
+*   **`unset_video_favorite(bvid: str, favorite_list_name: str)`**: Removes a video from a specified favorite list.
+
 
 ## Contribution Guidelines
 
